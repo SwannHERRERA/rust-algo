@@ -40,6 +40,18 @@ pub fn merge_two_arrays(array1: Vec<i32>, array2: Vec<i32>) -> Vec<i32> {
     return new_array;
 }
 
+pub fn count_trap(labyrinth: [[char; 5]; 4]) -> u32 {
+    let mut count = 0;
+    for row in labyrinth.iter() {
+        for c in row.iter() {
+            if *c == 'x' {
+                count += 1
+            }
+        }
+    }
+    return count;
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -66,5 +78,17 @@ mod tests {
         let new_array = merge_two_arrays(array1, array2);
 
         assert_eq!(new_array, [1, 2, 3, 4, 5, 6]);
+    }
+
+    #[test]
+    fn test_count_trap() {
+        let labyrinth = [
+            ['x', '.', '.', '.', '.'],
+            ['.', 'x', '.', 'x', '.'],
+            ['x', '.', '.', 'x', '.'],
+            ['x', '.', 'x', 'x', '.'],
+        ];
+        let result = count_trap(labyrinth);
+        assert_eq!(result, 8);
     }
 }
