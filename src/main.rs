@@ -1,12 +1,6 @@
 use std::cmp;
 
-fn main() {
-    let array1 = vec![1, 2, 3, 6, 11, 21];
-    let array2 = vec![1, 2, 4, 6, 7, 41, 62];
-    let new_array = merge_two_arrays(array1, array2);
-
-    println!("{:?}", new_array);
-}
+fn main() {}
 
 pub fn reverte_string(s: &str) -> String {
     s.chars().rev().collect()
