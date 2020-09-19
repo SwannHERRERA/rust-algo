@@ -46,6 +46,29 @@ pub fn count_trap(labyrinth: [[char; 5]; 4]) -> u32 {
     return count;
 }
 
+#[derive(Clone)]
+pub struct Solution {
+    vec: Vec<u8>,
+}
+
+pub fn frog_jump(n: u8, solution: Solution) -> Option<Solution> {
+    let sum: u8 = solution.vec.iter().sum();
+    if sum == n {
+        println!("{:?}", solution.vec);
+        return Some(solution);
+    }
+    if sum < n {
+        let mut add1 = solution.clone();
+        let mut add2 = solution.clone();
+
+        add1.vec.push(1);
+        add2.vec.push(2);
+        frog_jump(n, add1);
+        frog_jump(n, add2);
+    }
+    return None;
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -84,5 +107,19 @@ mod tests {
         ];
         let result = count_trap(labyrinth);
         assert_eq!(result, 8);
+    }
+
+    /**
+     * Problème de la grennouille
+     * Une grennouille veut aller de l'autre coté de la rivière
+     * Pour ce la elle doit sauté les 11 nénufarts
+     * Elle peut faire des bon de 1 nénufart ou de 2
+     * Donner toutes les possibilité de la grennouille
+     */
+    #[test]
+    fn test_frog_jump() {
+        let result = frog_jump(3, Solution { vec: Vec::new() });
+        let response = [vec![2, 1], vec![1, 1, 1], vec![1, 2]];
+        // assert_eq!(result, response);
     }
 }
